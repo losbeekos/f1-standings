@@ -1,0 +1,10 @@
+---
+const response = await fetch('http://ergast.com/api/f1/current/driverstandings.json');
+const data = await response.json();
+const standings = data.MRData.StandingsTable.StandingsLists[0];
+---
+
+{standings.season}
+
+<style>
+</style>

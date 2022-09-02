@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const response = await fetch(
+  'http://ergast.com/api/f1/current/driverstandings.json',
+);
+const data = await response.json();
+const standings = data.MRData.StandingsTable.StandingsLists[0];
+---
+
+<Layout title="F1 Standings">
+  <main>
+    <table class="table-auto min-w-full overflow-hidden rounded-2xl shadow-xl">
+      <thead class="bg-white text-left dark:bg-gray-800 dark:text-gray-200">
+        <th class="px-4 py-4">#</th>
+        <th class="px-4 py-4">Driver</th>
+        <th class="px-4 py-4">Points</th>
+        <th class="px-4 py-4">Wins</th>
+      </thead>
+      <tbody>
+        {
+          standings.DriverStandings.map(driver => (
+            <tr class="bg-slate-100 border-t dark:bg-gray-900 dark:text-gray-400 dark:border-t-slate-700">
+              <td class="px-4 py-3">{driver.position}</td>
+              <td class="px-4 py-3">
+                {driver.Driver.givenName}
+                {driver.Driver.familyName}
+              </td>
+              <td class="px-4 py-3">{driver.points}</td>
+              <td class="px-4 py-3">{driver.wins}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </main>
+</Layout>
+
+<style>
+
+</style>

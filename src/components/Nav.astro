@@ -1,0 +1,32 @@
+---
+const currentPath = new URL(Astro.request.url).pathname;
+---
+
+<nav class="flex gap-4 justify-center my-8">
+  <a
+    class:list={[
+      'px-5 py-3 rounded-full shadow-md',
+      { 'bg-white dark:bg-slate-100': currentPath === '/' },
+      {
+        'bg-slate-100 text-slate-600 dark:bg-slate-400 dark:text-slate-700':
+          currentPath !== '/',
+      },
+    ]}
+    href="/"
+  >
+    Drivers
+  </a>
+  <a
+    class:list={[
+      'px-5 py-3 rounded-full shadow-md',
+      { 'bg-white dark:bg-slate-100': currentPath.includes('constructors') },
+      {
+        'bg-slate-100 text-slate-600 dark:bg-slate-400 dark:text-slate-700':
+          !currentPath.includes('constructors'),
+      },
+    ]}
+    href="/constructors"
+  >
+    Constructors
+  </a>
+</nav>
